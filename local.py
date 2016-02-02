@@ -12,7 +12,8 @@ from getBacklinks import *
 from getLowest import getLowest
 
 from getLastModified import getLastModifiedDate
-from getTopsyScrapper import getTopsyCreationDate
+#Topsy service is no longer available
+#from getTopsyScrapper import getTopsyCreationDate
 from htmlMessages import *
 from pprint import pprint
 
@@ -49,7 +50,7 @@ def cd(url, backlinksFlag = False):
     if( backlinksFlag ):
         backlinkThread = Thread(target=getBacklinksFirstAppearanceDates, args=(url, outputArray, 4))
 
-    topsyThread = Thread(target=getTopsyCreationDate, args=(url, outputArray, 5))
+    #topsyThread = Thread(target=getTopsyCreationDate, args=(url, outputArray, 5))
     
 
     # Add threads to thread list
@@ -61,7 +62,7 @@ def cd(url, backlinksFlag = False):
     if( backlinksFlag ):
         threads.append(backlinkThread)
 
-    threads.append(topsyThread)	
+    #threads.append(topsyThread)	
 
     
     # Start new Threads
@@ -73,7 +74,7 @@ def cd(url, backlinksFlag = False):
     if( backlinksFlag ):
         backlinkThread.start()
 
-    topsyThread.start()
+    #topsyThread.start()
 
     
     # Wait for all threads to complete
@@ -91,11 +92,12 @@ def cd(url, backlinksFlag = False):
     else:
         backlink = ''
 
-    topsy = outputArray[5]  
+    #topsy = outputArray[5]  
     
     #note that archives["Earliest"] = archives[0][1]
     try:
-        lowest = getLowest([lastmodified, bitly, google, archives[0][1], backlink, topsy]) #for thread
+        #lowest = getLowest([lastmodified, bitly, google, archives[0][1], backlink, topsy]) #for thread
+        lowest = getLowest([lastmodified, bitly, google, archives[0][1], backlink]) #for thread
     except:
        print sys.exc_type, sys.exc_value , sys.exc_traceback
 
@@ -107,7 +109,7 @@ def cd(url, backlinksFlag = False):
     result.append(("Estimated Creation Date", lowest))
     result.append(("Last Modified", lastmodified))
     result.append(("Bitly.com", bitly))
-    result.append(("Topsy.com", topsy))
+    result.append(("Topsy.com", "Topsy is out of service"))
     result.append(("Backlinks", backlink))
     result.append(("Google.com", google))
     result.append(("Archives", archives))
