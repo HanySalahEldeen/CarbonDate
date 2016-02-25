@@ -29,8 +29,8 @@ class CarbonDateServer(object):
     @cherrypy.expose
     def cd(self, url):
 
-        if(len(url) < 1):
-            return "Url length less than 1"
+        if(len(url) == 0):
+            return "Invalid URL"
 
         #scheme missing?
         parsedUrl = urlparse.urlparse(url)

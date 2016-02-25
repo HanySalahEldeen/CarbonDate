@@ -30,6 +30,7 @@ def cd(url, backlinksFlag = False):
 
     #print 'Getting Creation dates for: ' + url
 
+    url = url.strip()
 
     #scheme missing?
     parsedUrl = urlparse.urlparse(url)
